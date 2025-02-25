@@ -4,9 +4,10 @@ import {
   Stack,
   Typography,
   TextField,
+  Link,
   // LoadingButton,
 } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion, MotionConfig } from 'framer-motion';
 import Lottie from 'lottie-react'
 // import { Link, useNavigate } from 'react-router-dom'
 import { ecommerceOutlookAnimation, shoppingBagAnimation} from '../assets'
@@ -135,7 +136,7 @@ function Login() {
           </motion.div>
 
           {/* Uncomment and configure these links with React Router if needed */}
-          {/* <Stack
+          <Stack
             flexDirection={'row'}
             justifyContent={'space-between'}
             alignItems={'center'}
@@ -159,13 +160,13 @@ function Login() {
                   to={'/signup'}
                 >
                   Don’t have an account?{' '}
-                  <span style={{ color: theme.palette.primary.dark }}>
+                  <span >
                     Register
                   </span>
                 </Typography>
               </motion.div>
             </MotionConfig>
-          </Stack> */}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

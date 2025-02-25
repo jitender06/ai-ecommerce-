@@ -2,6 +2,7 @@ import React from 'react';
 import { ShoppingCart, Search, Heart, Sparkles, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useCart } from '../../context/CartContext';
+import { NavLink } from 'react-router-dom';
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -26,7 +27,7 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            <button 
+            <button
               onClick={toggleTheme}
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
@@ -36,14 +37,22 @@ export function Header() {
               <Heart className="h-6 w-6" />
             </button>
             <div className="flex space-x-4">
-              <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">
-                Sign In
-              </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                Sign Up
-              </button>
+              <NavLink to="/login">
+                <span>
+                  <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">
+                    Sign In
+                  </button>
+                </span>
+              </NavLink>
+              <NavLink to="/register">
+                <span>
+                  <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                    Sign Up
+                  </button>
+                </span>
+              </NavLink>
             </div>
-            <button 
+            <button
               onClick={toggleCart}
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white relative"
             >

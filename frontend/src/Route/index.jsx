@@ -1,55 +1,29 @@
 import React, { lazy } from "react";
-import Community from "../Admin/partials/community/Community";
-import Posts from "../Admin/partials/posts/Posts";
-import { elements } from "chart.js";
-
 const Login = lazy(() => import("../pages/Login"));
+const Home = lazy(() => import("../pages/Home"));
+const Register = lazy(() => import("../pages/Register"))
 
 const PublicRoute = [
   {
     path: "/login",
     element: <Login />,
   },
-  // {
-  //   path: "/register",
-  //   element: <Register />,
-  // },
+  {
+    path: "/register",
+    element: <Register />,
+  },
   // {
   //   path: "/Welcome",
   //   element: <Landing />,
   // },
 ];
 
-// const UserRoute = [
-//   {
-//     path: "/",
-//     element: <Home />,
-//   },
-//   {
-//     path: "/messages",
-//     element: <Messages />,
-//   },
-//   {
-//     path: "/profile/:userId",
-//     element: <Profile />,
-//   },
-//   {
-//     path: "/reels",
-//     element: <Reels />,
-//   },
-//   {
-//     path: "/announcements",
-//     element: <Announcements />,
-//   },
-//   {
-//     path: "/notifications",
-//     element: <Notifications />,
-//   },
-//   {
-//     path:"/usergroups/groups",
-//     element: <UserGroups/>
-//   }
-// ];
+const UserRoute = [
+  {
+    path: "/",
+    element: <Home />,
+  },
+];
 
 // const AdminRoute = [
 //   {
@@ -84,5 +58,6 @@ const PublicRoute = [
 
 export {
    PublicRoute, 
-  //  UserRoute, AdminRoute 
+   UserRoute, 
+  //  AdminRoute 
   };

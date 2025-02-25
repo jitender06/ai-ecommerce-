@@ -1,21 +1,19 @@
 import React from "react";
 import { Header } from "./components/Header/Header";
-import { Carousel } from "./components/Carousel/Carousel";
-import { ProductGrid } from "./components/ProductGrid/ProductGrid";
 import { CartSidebar } from "./components/Cart/CartSidebar";
-import { Footer } from "./components/Footer/Footer";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CartProvider } from "./context/CartContext";
-import { carouselItems, products } from "./data";
-import Login from "./pages/Login";
-import { PublicRoute } from "./Route";
+import { PublicRoute, UserRoute } from "./Route";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { Loader } from "./components/Loader"
 function App() {
   return (
-    <ThemeProvider>
-      <CartProvider>
-        <Header />
-        <CartSidebar />
-        <Router>
+    <Router>
+      <ThemeProvider>
+        <CartProvider>
+          <Header />
+          <CartSidebar />
           <Suspense fallback={<Loader />}>
             <Routes>
               {/* Public Routes with Middleware */}
@@ -27,12 +25,25 @@ function App() {
                 />
               ))}
 
+              {/* User Routes with Middleware */}
+              {UserRoute?.map((item, index) => (
+                <Route
+                  key={index}
+                  path={item.path}
+                  element={
+                    // <UserMiddleware>
+                    item.element
+                    // </UserMiddleware>
+                  }
+                />
+              ))}
+
+
               {/* 404 - Not Found Route */}
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </Suspense>
-        </Router>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+          {/* <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
           <Header />
           <CartSidebar />
           <main className="pt-20">
@@ -40,10 +51,11 @@ function App() {
             <ProductGrid products={products} />
           </main>
           <Footer />
-          {/* <Login/> */}
-        </div>
-      </CartProvider>
-    </ThemeProvider>
+          <Login/>
+          </div> */}
+        </CartProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
