@@ -12,12 +12,14 @@ import Lottie from 'lottie-react'
 // import { Link, useNavigate } from 'react-router-dom'
 import { ecommerceOutlookAnimation, shoppingBagAnimation} from '../assets'
 import { LoadingButton } from '@mui/lab';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('idle'); // idle, pending, success, error
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const is480 = window.innerWidth <= 480; // Simple responsive check (you might use MUI's useMediaQuery instead)
   const is900 = window.innerWidth <= 900;
@@ -35,9 +37,10 @@ function Login() {
 
       // Store token in localStorage
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', response.data.user);
       setStatus('success');
       console.log('Logged in:', response.data.user);
-
+      navigate('/products')
       // Redirect or update app state here (e.g., using React Router or Context)
       // Example: window.location.href = '/products';
     } catch (err) {

@@ -4,17 +4,39 @@ const connectDB = require('./config/db');
 const Product = require('./models/Product');
 require('dotenv').config();
 
-// Connect to MongoDB
 connectDB();
 
 const seedProducts = async () => {
   try {
-    // Fetch dummy products from DummyJSON
-    const response = await axios.get('https://dummyjson.com/products?limit=50');
-    const products = response.data.products;
+    // Fetch all products from DummyJSON (increase limit to max or fetch all)
+    const response = await axios.get('https://dummyjson.com/products?limit=0');
+    const allProducts = response.data.products;
 
-    // Map DummyJSON fields to our Product schema
-    const productDocs = products.map((product) => ({
+    // Desired categories (fashion, electronics, etc., excluding groceries)
+    const desiredCategories = [
+      "mens-shirts",
+      "mens-shoes",
+      "mens-watches",
+      "womens-dresses",
+      "womens-shoes",
+      "womens-watches",
+      "womens-bags",
+      "womens-jewellery",
+      "sunglasses",
+      "tops",
+      "electronics",
+      "laptops",
+      "mobile-accessories",
+      "smartphones",
+    ];
+
+    // Filter products
+    const filteredProducts = allProducts.filter((product) =>
+      desiredCategories.includes(product.category)
+    );
+
+    // Map to our schema
+    const productDocs = filteredProducts.map((product) => ({
       name: product.title,
       description: product.description,
       price: product.price,
@@ -24,11 +46,11 @@ const seedProducts = async () => {
       rating: product.rating,
     }));
 
-    // Clear existing products and insert new ones
+    // Clear existing products and insert filtered ones
     await Product.deleteMany({});
     await Product.insertMany(productDocs);
 
-    console.log('Products seeded successfully!');
+    console.log(`Seeded ${productDocs.length} fashion-focused products successfully!`);
     process.exit(0);
   } catch (error) {
     console.error('Error seeding products:', error);

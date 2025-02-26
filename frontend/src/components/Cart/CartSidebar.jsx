@@ -1,69 +1,78 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useCart } from '../../context/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleCart, fetchCart, removeFromCart } from '../../store/cartSlice';
+import { Stack, Typography, IconButton, Button } from '@mui/material';
 
 export function CartSidebar() {
-  const { isOpen, toggleCart, cartItems, removeFromCart, total } = useCart();
+  const dispatch = useDispatch();
+  const { isOpen, cartItems } = useSelector((state) => state.cart);
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (token && isOpen) {
+      dispatch(fetchCart());
+    }
+  }, [dispatch, token, isOpen]);
+
+  const total = cartItems.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
 
   return (
-    <div 
-      className={`fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
+    <Stack
+      sx={{
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        width: { xs: '100%', sm: '24rem' },
+        height: '100%',
+        bgcolor: 'background.paper',
+        boxShadow: 6,
+        transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
+        transition: 'transform 0.3s ease-in-out',
+        zIndex: 50,
+      }}
     >
-      <div className="h-full flex flex-col">
-        <div className="px-4 py-6 border-b dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold dark:text-white">Shopping Cart</h2>
-            <button 
-              onClick={toggleCart}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-            >
-              <X className="h-6 w-6 text-gray-500 dark:text-gray-400" />
-            </button>
-          </div>
-        </div>
+      <Stack direction="row" justifyContent="space-between" alignItems="center" p={2} borderBottom={1} borderColor="divider">
+        <Typography variant="h6" fontWeight="bold">Shopping Cart</Typography>
+        <IconButton onClick={() => dispatch(toggleCart())} color="inherit">
+          <X size={24} />
+        </IconButton>
+      </Stack>
 
-        <div className="flex-1 overflow-y-auto py-6 px-4">
-          {cartItems.length === 0 ? (
-            <p className="text-center text-gray-500 dark:text-gray-400">Your cart is empty</p>
-          ) : (
-            <div className="space-y-6">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex items-center">
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="h-20 w-20 object-cover rounded"
-                  />
-                  <div className="ml-4 flex-1">
-                    <h3 className="text-sm font-medium dark:text-white">{item.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.price}</p>
-                  </div>
-                  <button 
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+      <Stack flex={1} overflow="auto" p={2}>
+        {cartItems.length === 0 ? (
+          <Typography textAlign="center" color="text.secondary">Your cart is empty</Typography>
+        ) : (
+          <Stack spacing={2}>
+            {cartItems.map((item) => (
+              <Stack key={item.productId._id} direction="row" alignItems="center" spacing={2}>
+                <img
+                  src={item.productId.image}
+                  alt={item.productId.name}
+                  style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 4 }}
+                />
+                <Stack flex={1}>
+                  <Typography variant="body1">{item.productId.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    ${item.productId.price} x {item.quantity}
+                  </Typography>
+                </Stack>
+                <IconButton onClick={() => dispatch(removeFromCart(item.productId._id))} color="inherit">
+                  <X size={20} />
+                </IconButton>
+              </Stack>
+            ))}
+          </Stack>
+        )}
+      </Stack>
 
-        <div className="border-t dark:border-gray-700 px-4 py-6">
-          <div className="flex justify-between text-base font-medium dark:text-white">
-            <p>Subtotal</p>
-            <p>${total.toFixed(2)}</p>
-          </div>
-          <button
-            className="mt-6 w-full bg-blue-600 px-6 py-3 text-white font-medium rounded-lg hover:bg-blue-700"
-          >
-            Checkout
-          </button>
-        </div>
-      </div>
-    </div>
+      <Stack p={2} borderTop={1} borderColor="divider">
+        <Stack direction="row" justifyContent="space-between" mb={2}>
+          <Typography fontWeight="medium">Subtotal</Typography>
+          <Typography fontWeight="medium">${total.toFixed(2)}</Typography>
+        </Stack>
+        <Button variant="contained" fullWidth>Checkout</Button>
+      </Stack>
+    </Stack>
   );
 }

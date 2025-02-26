@@ -15,6 +15,9 @@ connectDB();
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/products', require('./routes/products')); // Add this line
+app.use('/api/cart', require('./routes/cart')); // Add this line
+app.use('/api/wishlist', require('./routes/wishlist')); // Add this line
 // app.use('/api/products', require('./routes/products'));
 // app.use('/api/orders', require('./routes/orders'));
 // app.use('/api/cart', require('./routes/cart'));

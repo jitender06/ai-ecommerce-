@@ -221,7 +221,7 @@ function Register() {
         borderRadius={2}
         boxShadow={3}
       >
-        <Typography
+        {/* <Typography
           variant="h2"
           sx={{ wordBreak: 'break-word', mb: 2 }}
           fontWeight={600}
@@ -231,7 +231,7 @@ function Register() {
         </Typography>
         <Typography align="center" color={'GrayText'} variant="body2" mb={4}>
           - Shop Anything
-        </Typography>
+        </Typography> */}
 
         <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
           {steps.map((label) => (

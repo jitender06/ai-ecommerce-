@@ -2,6 +2,8 @@ import React, { lazy } from "react";
 const Login = lazy(() => import("../pages/Login"));
 const Home = lazy(() => import("../pages/Home"));
 const Register = lazy(() => import("../pages/Register"))
+const Products = lazy(() => import("../pages/Products"))
+const ProductView = lazy(() => import("../pages/ProductView"))
 
 const PublicRoute = [
   {
@@ -12,10 +14,14 @@ const PublicRoute = [
     path: "/register",
     element: <Register />,
   },
-  // {
-  //   path: "/Welcome",
-  //   element: <Landing />,
-  // },
+  {
+    path: "/products",
+    element: <Products />,
+  },
+  {
+    path: "/products/:id",
+    element: <ProductView />,
+  },
 ];
 
 const UserRoute = [

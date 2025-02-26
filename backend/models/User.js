@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
     country: { type: String, default: '' },
   },
   role: { type: String, enum: ['customer', 'admin'], default: 'customer' },
-  cart: [{ productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }, quantity: { type: Number, default: 1 } }],
+  cart: [{
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+    quantity: { type: Number, default: 1, min: 1 },
+  }],
+  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }], // Add wishlist
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
   createdAt: { type: Date, default: Date.now },
 });
