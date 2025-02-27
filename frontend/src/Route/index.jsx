@@ -4,6 +4,7 @@ const Home = lazy(() => import("../pages/Home"));
 const Register = lazy(() => import("../pages/Register"))
 const Products = lazy(() => import("../pages/Products"))
 const ProductView = lazy(() => import("../pages/ProductView"))
+const CategoryPage = lazy(() => import("../pages/CategoryPage"))
 
 const PublicRoute = [
   {
@@ -21,6 +22,10 @@ const PublicRoute = [
   {
     path: "/products/:id",
     element: <ProductView />,
+  },
+  {
+    path: "/category/:category",
+    element: <CategoryPage />,
   },
 ];
 
