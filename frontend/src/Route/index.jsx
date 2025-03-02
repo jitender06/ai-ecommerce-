@@ -5,6 +5,15 @@ const Register = lazy(() => import("../pages/Register"))
 const Products = lazy(() => import("../pages/Products"))
 const ProductView = lazy(() => import("../pages/ProductView"))
 const CategoryPage = lazy(() => import("../pages/CategoryPage"))
+const AiTools = lazy(() => import("../pages/AI/AiTools"))
+const ExchangeProducts = lazy(() => import("../pages/ExchangeProducts"))
+const AdminPortal = lazy(() => import("../pages/admin/AdminPortal"))
+const ManageProducts = lazy(() => import("../pages/admin/ManageProducts"))
+const ExchangeRequests = lazy(() => import("../pages/admin/ExchangeRequests"))
+const UserManagement = lazy(() => import("../pages/admin/UserManagement"))
+const Checkout = lazy(() => import("../components/Checkout"))
+const PackingAssistant = lazy(() => (import("../components/PackingAssistant")))
+
 
 const PublicRoute = [
   {
@@ -14,6 +23,10 @@ const PublicRoute = [
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/",
+    element: <Home />,
   },
   {
     path: "/products",
@@ -27,48 +40,52 @@ const PublicRoute = [
     path: "/category/:category",
     element: <CategoryPage />,
   },
-];
-
-const UserRoute = [
   {
-    path: "/",
-    element: <Home />,
+    path: "/ai-tools",
+    element: <AiTools />,
   },
+  {
+    path: "/exchange-product",
+    element: <ExchangeProducts />,
+  },
+  {
+    path: "/Checkout",
+    element: <Checkout />,
+  },
+  {
+    path: "/packing-assistant",
+    element: <PackingAssistant />,
+  }
 ];
 
-// const AdminRoute = [
+// const UserRoute = [
 //   {
-//     path: "/admin",
-//     element: <Dashboard />,
+//     path: "/",
+//     element: <Home />,
 //   },
-//   {
-//     path: "/community",
-//     element: <Community />,
-//   },
-//   {
-//     path: "/posts",
-//     element: <Posts />,
-//   },
-//   {
-//     path: "/contentModeration",
-//     element: <ContentModeration />,
-//   },
-//   {
-//     path: "/createGroup",
-//     element: <CreateGroup />,
-//   },
-//   {
-//     path: "/groupchat",
-//     element: <GroupChat />,
-//   },
-//   {
-//     path: "/groups",
-//     element: <Groups/>
-//   }
 // ];
+
+const AdminRoute = [
+  {
+    path: "/admin/dashboard",
+    element: <AdminPortal />,
+  },
+  {
+    path: "/admin/products",
+    element: <ManageProducts />,
+  },
+  {
+    path: "/admin/exchange-requests",
+    element: <ExchangeRequests />,
+  },
+  {
+    path: "/admin/users",
+    element: <UserManagement />,
+  }
+];
 
 export {
    PublicRoute, 
-   UserRoute, 
-  //  AdminRoute 
+  //  UserRoute, 
+   AdminRoute 
   };

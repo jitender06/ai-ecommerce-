@@ -5,7 +5,7 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (filters, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products', { params: filters });
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products`, { params: filters });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -17,7 +17,7 @@ export const fetchSearchResults = createAsyncThunk(
   'products/fetchSearchResults',
   async (search, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products`, {
         params: { search, page: 1, limit: 5 },
       });
       return response.data.products; // Return only the products array
@@ -31,7 +31,7 @@ export const fetchCategories = createAsyncThunk(
   'products/fetchCategories',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/products/categories');
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products/categories`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import BlurText from "../../../animations/BlurText/BlurText"
+import { Link } from "react-router-dom";
 
 export function Carousel({ items }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,9 +52,11 @@ export function Carousel({ items }) {
                   className="text-white text-7xl font-bold mb-4"
                 />
                 <p className="text-white text-xl mb-8">{item.description}</p>
-                <button className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
-                  Shop Now
-                </button>
+                <Link to={"/ai-tools"}>
+                  <button className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Shop Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

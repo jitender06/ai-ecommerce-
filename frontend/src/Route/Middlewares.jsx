@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Navigate } from 'react-router';
 
 const RoleMiddleware = (props, roleType) => {
-    const user = JSON.parse(localStorage.getItem('data'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem("token");
 
     if (token && user.role == roleType) {
@@ -13,21 +13,18 @@ const RoleMiddleware = (props, roleType) => {
             </React.Fragment>
         );
     } else {
-        return(
-            <React.Fragment>
-                <Navigate to={'/Welcome'}  />
-            </React.Fragment>
-        );
+      const redirectPath = user?.role === "admin" ? "/admin/dashboard" : "/";
+      return <Navigate to={redirectPath} />;
     }
 }
 
 const PublicMiddleware = ({ children }) => {
-    const user = JSON.parse(localStorage.getItem("data"));
+    const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
   
     if (token) {
       if (user?.role === "admin") {
-        return <Navigate to="/admin" replace />;
+        return <Navigate to="/admin/dashboard" replace />;
       } else {
         return <Navigate to="/" replace />;
       }
@@ -38,6 +35,6 @@ const PublicMiddleware = ({ children }) => {
 
   
 const AdminMiddleware = (props) => RoleMiddleware(props, 'admin');
-const UserMiddleware = (props) => RoleMiddleware(props, 'user');
+const UserMiddleware = (props) => RoleMiddleware(props, 'customer');
 
 export { AdminMiddleware, UserMiddleware, PublicMiddleware }

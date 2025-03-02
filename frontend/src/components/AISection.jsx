@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-// import aiCharacter from '../assets/aiCharacter.json'; // Adjust path to your Lottie file
-// import backgroundImage from 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'; // Example AI-themed background
+import aiCharacter from '../assets/animations/aiCharacter.json'; // Adjust path to your Lottie file
 
 function AISection() {
   const containerVariants = {
@@ -70,11 +69,10 @@ function AISection() {
           className="lg:w-1/2 flex justify-center"
           variants={lottieVariants}
         >
-          {/* <Lottie
+          <Lottie
             animationData={aiCharacter}
             loop={true}
-            style={{ width: '80%', maxWidth: '400px', height: 'auto' }}
-          /> */}
+          />
         </motion.div>
       </motion.div>
 

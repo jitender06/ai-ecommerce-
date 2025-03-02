@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { logout } from './authSlice'; // Import logout
 
 export const addToWishlist = createAsyncThunk(
   'wishlist/addToWishlist',
@@ -71,6 +72,10 @@ const wishlistSlice = createSlice({
       })
       .addCase(removeFromWishlist.fulfilled, (state, action) => {
         state.wishlistItems = action.payload;
+      })
+      .addCase(logout, (state) => {
+        state.wishlistItems = []; // Clear wishlist on logout
+        state.isOpen = false; // Close wishlist drawer
       });
   },
 });

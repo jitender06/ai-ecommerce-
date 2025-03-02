@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { logout } from './authSlice'; // Import logout
 
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
@@ -71,6 +72,10 @@ const cartSlice = createSlice({
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.cartItems = action.payload;
+      })
+      .addCase(logout, (state) => {
+        state.cartItems = []; // Clear cart on logout
+        state.isOpen = false; // Close cart sidebar
       });
   },
 });

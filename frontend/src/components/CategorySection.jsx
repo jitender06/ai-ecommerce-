@@ -16,7 +16,7 @@ function CategorySection() {
   const navigate = useNavigate();
 
   return (
-    <Stack spacing={4} py={8} bgcolor="background.default">
+    <Stack spacing={4} py={8} bgcolor="background.default" className='dark:bg-gray-900'>
       <Typography
         variant="h3"
         align="center"
@@ -25,6 +25,7 @@ function CategorySection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         sx={{ color: 'text.primary', fontWeight: 'bold' }}
+        className='dark:text-white'
       >
         Shop by Category
       </Typography>

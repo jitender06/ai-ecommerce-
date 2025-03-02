@@ -94,7 +94,7 @@ export function ProductCard({ product, featured }) {
       </div>
       <h3 className="font-semibold text-lg mb-1 dark:text-white">{product.name}</h3>
       <div className="flex items-center justify-between">
-        <span className="text-lg font-bold text-blue-600 dark:text-blue-400">${product.price}</span>
+        <span className="text-lg font-bold text-blue-600 dark:text-blue-400"> ₹{product.price}</span>
         <div className="flex items-center">
           <Star className="h-4 w-4 text-yellow-400 fill-current" />
           <span className="ml-1 text-sm text-gray-600 dark:text-gray-300">{product.rating}</span>

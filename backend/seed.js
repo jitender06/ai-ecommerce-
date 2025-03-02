@@ -14,21 +14,28 @@ const seedProducts = async () => {
 
     // Desired categories (fashion, electronics, etc., excluding groceries)
     const desiredCategories = [
+      "smartphones",
+      "laptops",
+      "fragrances",
+      "skincare",
+      "groceries",
+      "home-decoration",
+      "furniture",
+      "tops",
+      "womens-dresses",
+      "womens-shoes",
       "mens-shirts",
       "mens-shoes",
       "mens-watches",
-      "womens-dresses",
-      "womens-shoes",
       "womens-watches",
       "womens-bags",
       "womens-jewellery",
       "sunglasses",
-      "tops",
-      "electronics",
-      "laptops",
-      "mobile-accessories",
-      "smartphones",
+      "automotive",
+      "motorcycle",
+      "lighting"
     ];
+    
 
     // Filter products
     const filteredProducts = allProducts.filter((product) =>
