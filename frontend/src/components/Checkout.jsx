@@ -13,6 +13,7 @@ import {
   TextField,
 } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
+import Header from './Header/Header';
 
 function Checkout() {
   const { token, user } = useSelector((state) => state.auth);
@@ -87,81 +88,85 @@ function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex flex-col items-center p-6">
-      <Typography variant="h4" className="text-gray-900 dark:text-white font-extrabold mb-8 text-center">
-        Checkout
-      </Typography>
-      {cartItems.length === 0 ? (
-        <Typography className="text-gray-500 dark:text-gray-400 text-center">
-          Your cart is empty
+    <>
+    <Header/>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex flex-col items-center p-6">
+        <Typography variant="h4" className="text-gray-900 dark:text-white font-extrabold mb-8 text-center">
+          Checkout
         </Typography>
-      ) : (
-        <Stack spacing={4} className="w-full max-w-4xl mt-14">
-          {cartItems.map((item) => (
-            <Card
-              key={item._id}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex items-center"
-            >
-              <CardMedia
-                component="img"
-                image={item.productId.image}
-                alt={item.productId.name}
-                className="sm:h-28 object-contain rounded-l-xl w-64"
-              />
-              <CardContent className="flex-1 p-4">
-                <Stack direction="column" spacing={1}>
-                  <Typography variant="h6" className="text-gray-900 dark:text-white font-semibold">
-                    {item.productId.name}
-                  </Typography>
-                  <Typography className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
-                    {item.productId.description}
-                  </Typography>
-                  <Stack direction="row" alignItems="center" spacing={2} mt={2}>
-                    <Typography className="text-gray-600 dark:text-gray-300">Qty:</Typography>
-                    <IconButton
-                      onClick={() => handleQuantityChange(item.productId._id, item.quantity - 1)}
-                      className="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full"
-                    >
-                      <Remove fontSize="small" />
-                    </IconButton>
-                    <TextField
-                      value={item.quantity}
-                      type="number"
-                      inputProps={{ min: 1, style: { textAlign: 'center' } }}
-                      sx={{ width: '60px', '& .MuiOutlinedInput-root': { borderRadius: '9999px' } }}
-                      variant="outlined"
-                      size="small"
-                      onChange={(e) => handleQuantityChange(item.productId._id, parseInt(e.target.value) || 1)}
-                    />
-                    <IconButton
-                      onClick={() => handleQuantityChange(item.productId._id, item.quantity + 1)}
-                      className="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full"
-                    >
-                      <Add fontSize="small" />
-                    </IconButton>
-                    <Typography className="text-blue-600 dark:text-blue-400 font-bold ml-4">
-                    ₹{(item.productId.price * item.quantity).toFixed(2)}
+        {cartItems.length === 0 ? (
+          <Typography className="text-gray-500 dark:text-gray-400 text-center">
+            Your cart is empty
+          </Typography>
+        ) : (
+          <Stack spacing={4} className="w-full max-w-4xl mt-14">
+            {cartItems.map((item) => (
+              <Card
+                key={item._id}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex items-center"
+              >
+                <CardMedia
+                  component="img"
+                  image={item.productId.image}
+                  alt={item.productId.name}
+                  style={{objectFit:"contain", width:"200px"}}
+                  className="sm:h-28 object-contain rounded-l-xl w-64"
+                />
+                <CardContent className="flex-1 p-4">
+                  <Stack direction="column" spacing={1}>
+                    <Typography variant="h6" className="text-gray-900 dark:text-white font-semibold">
+                      {item.productId.name}
                     </Typography>
+                    <Typography className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+                      {item.productId.description}
+                    </Typography>
+                    <Stack direction="row" alignItems="center" spacing={2} mt={2}>
+                      <Typography className="text-gray-600 dark:text-gray-300">Qty:</Typography>
+                      <IconButton
+                        onClick={() => handleQuantityChange(item.productId._id, item.quantity - 1)}
+                        className="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full"
+                      >
+                        <Remove fontSize="small" />
+                      </IconButton>
+                      <TextField
+                        value={item.quantity}
+                        type="number"
+                        inputProps={{ min: 1, style: { textAlign: 'center' } }}
+                        sx={{ width: '60px', '& .MuiOutlinedInput-root': { borderRadius: '9999px' } }}
+                        variant="outlined"
+                        size="small"
+                        onChange={(e) => handleQuantityChange(item.productId._id, parseInt(e.target.value) || 1)}
+                      />
+                      <IconButton
+                        onClick={() => handleQuantityChange(item.productId._id, item.quantity + 1)}
+                        className="text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full"
+                      >
+                        <Add fontSize="small" />
+                      </IconButton>
+                      <Typography className="text-blue-600 dark:text-blue-400 font-bold ml-4">
+                      ₹{(item.productId.price * item.quantity).toFixed(2)}
+                      </Typography>
+                    </Stack>
                   </Stack>
-                </Stack>
-              </CardContent>
-            </Card>
-          ))}
-          <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center" mt={6} className="w-full">
-            <Typography variant="h6" className="text-gray-900 dark:text-white font-semibold mb-4 sm:mb-0">
-              Total:  ₹{calculateTotal()}
-            </Typography>
-            <Button
-              variant="contained"
-              onClick={handleCheckout}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full px-8 py-3 shadow-md"
-            >
-              Confirm Order
-            </Button>
+                </CardContent>
+              </Card>
+            ))}
+            <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center" mt={6} className="w-full">
+              <Typography variant="h6" className="text-gray-900 dark:text-white font-semibold mb-4 sm:mb-0">
+                Total:  ₹{calculateTotal()}
+              </Typography>
+              <Button
+                variant="contained"
+                onClick={handleCheckout}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full px-8 py-3 shadow-md"
+              >
+                Confirm Order
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }
 
