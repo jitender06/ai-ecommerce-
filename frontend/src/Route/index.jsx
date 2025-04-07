@@ -13,7 +13,7 @@ const ExchangeRequests = lazy(() => import("../pages/admin/ExchangeRequests"))
 const UserManagement = lazy(() => import("../pages/admin/UserManagement"))
 const Checkout = lazy(() => import("../components/Checkout"))
 const PackingAssistant = lazy(() => (import("../components/PackingAssistant")))
-
+const VirtualTryOn = lazy(() => (import("../components/VirtualTryOn")))
 
 const PublicRoute = [
   {
@@ -55,6 +55,10 @@ const PublicRoute = [
   {
     path: "/packing-assistant",
     element: <PackingAssistant />,
+  },
+  {
+    path: "/virtual-try-on",
+    element: <VirtualTryOn />,
   }
 ];
 
