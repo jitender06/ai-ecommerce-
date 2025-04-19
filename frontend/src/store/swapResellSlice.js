@@ -52,7 +52,7 @@ const swapResellSlice = createSlice({
       })
       .addCase(listSwapItem.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message;
+        state.error = action.payload?.message || 'error fetching';
       })
       .addCase(fetchSwapItems.pending, (state) => {
         state.status = 'loading';
@@ -63,7 +63,7 @@ const swapResellSlice = createSlice({
       })
       .addCase(fetchSwapItems.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message;
+        state.error = action.payload?.message || 'error fetching';
       });
   },
 });

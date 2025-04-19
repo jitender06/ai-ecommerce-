@@ -54,7 +54,7 @@ const recommendationsSlice = createSlice({
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message;
+        state.error = action.payload?.message || 'error fetching';
       })
       .addCase(fetchRecommendations.pending, (state) => {
         state.status = 'loading';
@@ -66,7 +66,7 @@ const recommendationsSlice = createSlice({
       })
       .addCase(fetchRecommendations.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message;
+        state.error = action.payload?.message || 'error fetching';
       });
   },
 });

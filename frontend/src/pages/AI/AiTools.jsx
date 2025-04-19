@@ -41,13 +41,13 @@ function AiTools() {
   // Fetch catokentegories and default to "fragrance" on mount
   useEffect(() => {
     // if (token) {
-      dispatch(fetchCategories()).then(() => {
-        // Check if "fragrance" exists in categories, then fetch its products
-        const hasFragrance = categories.includes("fragrances");
-        if (hasFragrance) {
-          dispatch(fetchRecommendations("fragrances"));
-        }
-      });
+    dispatch(fetchCategories()).then(() => {
+      // Check if "fragrance" exists in categories, then fetch its products
+      const hasFragrance = categories.includes("fragrances");
+      if (hasFragrance) {
+        dispatch(fetchRecommendations("fragrances"));
+      }
+    });
     // }
   }, [dispatch, token]);
 
@@ -187,7 +187,11 @@ function AiTools() {
                 >
                   {category
                     .split("-")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .map((word) => {
+                      if (word === "mens") return "Men's";
+                      if (word === "womens") return "Women's";
+                      return word.charAt(0).toUpperCase() + word.slice(1);
+                    })
                     .join(" ")}
                 </Button>
               </motion.div>
@@ -254,7 +258,7 @@ function AiTools() {
                             .join(" ")}
                         </Typography>
                         <Typography className="text-blue-600 dark:text-blue-400 font-bold">
-                        ₹{item.price}
+                          ₹{item.price}
                         </Typography>
                         <Stack
                           direction="row"

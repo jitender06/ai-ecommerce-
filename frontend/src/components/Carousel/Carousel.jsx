@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import BlurText from "../../../animations/BlurText/BlurText"
+import BlurText from "../../../animations/BlurText/BlurText";
 import { Link } from "react-router-dom";
 
 export function Carousel({ items }) {
@@ -26,41 +26,53 @@ export function Carousel({ items }) {
   };
 
   return (
-    <div className="relative h-[600px] overflow-hidden">
+    <div className="relative h-full overflow-hidden">
       <div
         className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {items.map((item, index) => (
-          <div key={index} className="min-w-full h-full relative">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center">
-              <div className="max-w-7xl mx-auto px-8">
-                {/* <h1 className="text-white text-5xl font-bold mb-4">
+        {items &&
+          items?.map((item, index) => (
+            <div key={index} className="min-w-full h-full relative">
+              {item.image.endsWith(".mp4") ? (
+                <video
+                  src={item.image}
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                />
+              )}
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center">
+                <div className="max-w-7xl mx-auto px-8">
+                  {/* <h1 className="text-white text-5xl font-bold mb-4">
                   {item.title}
                 </h1> */}
-                <BlurText
-                  text={item.title}
-                  delay={150}
-                  animateBy="words"
-                  direction="top"
-                  onAnimationComplete={handleAnimationComplete}
-                  className="text-white text-7xl font-bold mb-4"
-                />
-                <p className="text-white text-xl mb-8">{item.description}</p>
-                <Link to={"/ai-tools"}>
-                  <button className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Shop Now
-                  </button>
-                </Link>
+                  <BlurText
+                    text={item.title}
+                    delay={150}
+                    animateBy="words"
+                    direction="top"
+                    onAnimationComplete={handleAnimationComplete}
+                    className="text-white text-7xl font-bold mb-4"
+                  />
+                  <p className="text-white text-xl mb-8">{item.description}</p>
+                  <Link to={"/ai-tools"}>
+                    <button className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                      Shop Now
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <button
         onClick={prevSlide}

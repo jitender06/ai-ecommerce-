@@ -2,14 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stack, Typography, Card, CardActionArea, Box } from '@mui/material';
 import { motion } from 'framer-motion';
-
+import Men from '../assets/men.jpeg'
+import Women from '../assets/Women.jpeg'
 // Updated category data with Electronics and Sunglasses
 const categories = [
-  { name: 'mens-shirts', displayName: "Men's", image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80' },
-  { name: 'womens-dresses', displayName: "Women's", image: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80' },
+  { name: 'mens-shirts', displayName: "Men's", image: Men },
+  { name: 'womens-dresses', displayName: "Women's", image: Women },
   { name: 'mens-shoes', displayName: 'Shoes', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80' },
   { name: 'mobile-accessories', displayName: 'Electronics', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80' }, // Electronics
-  { name: 'sunglasses', displayName: 'Sunglasses', image: 'https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?auto=format&fit=crop&w=800&q=80' },
+  { name: 'sunglasses', displayName: 'Sunglasses', image: 'https://images.unsplash.com/photo-1584036553516-bf83210aa16c?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
 ];
 
 function CategorySection() {

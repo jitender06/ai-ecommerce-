@@ -41,7 +41,7 @@ const tryOnSlice = createSlice({
       })
       .addCase(uploadTryOnPhoto.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message;
+        state.error = action.payload?.message || 'error fetching';
       });
   },
 });

@@ -1,18 +1,28 @@
+import One from "../assets/carousel/one.mp4";
+import Two from "../assets/carousel/two.jpg";    
+import Three from "../assets/carousel/three.jpg";
+import Four from "../assets/carousel/four.jpg";
+
 export const carouselItems = [
     {
-      image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070",
+      image: One,
       title: "AI-Powered Fashion Picks",
       description: "Discover your perfect style with our smart recommendations"
     },
     {
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070",
+      image: Two,
       title: "Personalized Shopping",
       description: "Shop smarter with AI-curated selections just for you"
     },
     {
-      image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070",
+      image: Three,
       title: "Trending Collections",
       description: "Stay ahead with AI-predicted fashion trends"
+    },
+    {
+      image: Four,
+      title: "Exclusive Offers",
+      description: "Unlock special deals with our AI-driven insights"
     }
   ];
   

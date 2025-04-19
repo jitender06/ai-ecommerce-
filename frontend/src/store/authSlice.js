@@ -58,7 +58,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message || 'Registration failed';
+        state.error = action.payload?.message || 'Registration failed';
       })
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
@@ -73,7 +73,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload.message || 'Login failed';
+        state.error = action.payload?.message || 'Login failed';
       });
   },
 });
