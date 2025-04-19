@@ -10,8 +10,9 @@ import {
   User,
   LogOut,
   Bot,
-  MessageCircle ,
+  MessageCircle,
   ArrowLeftRight,
+  ScanFace,
 } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -204,6 +205,13 @@ function Header() {
               >
                 <Package className="h-6 w-6" />
               </button>
+              <button
+                onClick={() => navigate("/virtual-try-on")}
+                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white relative"
+              >
+                <ScanFace className="h-6 w-6" />
+              </button>
+
               <button
                 onClick={handleWishlistToggle}
                 className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white relative"

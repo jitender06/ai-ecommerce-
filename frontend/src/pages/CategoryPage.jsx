@@ -102,6 +102,7 @@ function CategoryPage() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          style={{marginTop: "60px", marginBottom: "20px"}}
         >
           {category
             .split("-")
@@ -119,6 +120,7 @@ function CategoryPage() {
               justifyContent="center"
               gap={3}
               sx={{ maxWidth: "1200px", mx: "auto" }}
+              style={{margin: "0 auto"}}
             >
               {products.map((product) => (
                 <Card
