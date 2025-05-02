@@ -1,3 +1,4 @@
+Github setting to remove existing account and add a new account with ssh key
 # Github Settings 
 
 1. Clear Existing Git Configuration
